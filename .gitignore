@@ -1,0 +1,4 @@
+# 動画ビルド用スクラッチ（音声/中間mp4/スライドHTML等）
+.m1build/
+# Playwright MCP の一時出力
+.playwright-mcp/
