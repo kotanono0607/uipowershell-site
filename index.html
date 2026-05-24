@@ -193,6 +193,90 @@
     color: #111;
     margin-bottom: 6px;
   }
+
+  /* 埋め込み（動画） */
+  .embed {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 10px 0;
+    background: #000;
+  }
+  .embed iframe, .embed video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+
+  /* 差し替え前のプレースホルダー */
+  .video-ph, .slide-ph {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 4px;
+    font-weight: 700;
+  }
+  .video-ph {
+    color: #fff;
+    background: repeating-linear-gradient(45deg,#3b4252,#3b4252 12px,#434c5e 12px,#434c5e 24px);
+  }
+  .video-ph small, .slide-ph small { font-weight: 400; font-size: 0.72rem; opacity: 0.85; }
+
+  /* スライド・カルーセル */
+  .carousel {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border: 1px solid #e8ecf0;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #fff;
+    margin: 10px 0;
+  }
+  .carousel .slide {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+  .carousel .slide.active { opacity: 1; }
+  .carousel .slide.slide-ph { background: #eef2ff; color: #2563eb; }
+  .car-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px; height: 40px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.45);
+    color: #fff;
+    font-size: 1.4rem;
+    line-height: 1;
+    cursor: pointer;
+  }
+  .car-btn.prev { left: 8px; }
+  .car-btn.next { right: 8px; }
+  .car-dots {
+    position: absolute;
+    bottom: 10px; left: 0; right: 0;
+    display: flex; justify-content: center; gap: 6px;
+  }
+  .car-dots span {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.25);
+    cursor: pointer;
+  }
+  .car-dots span.on { background: #2563eb; }
 </style>
 </head>
 <body>
@@ -275,6 +359,17 @@
   <div class="info-block" style="margin-top:16px;">
     <h3>どんな業務も この形に整理できる</h3>
     <p>インプット → 処理 → アウトプット。<br>だから、ひとつひとつは機械に任せられます。</p>
+  </div>
+
+  <div class="desc" style="margin:24px 0 8px;">スライドで見る</div>
+  <!-- スライド差し替え: 各 .slide を <img class="slide" src="assets/slides/01.png" alt=""> に置き換える -->
+  <div class="carousel">
+    <div class="slide active slide-ph">スライド 1<small>assets/slides/ の画像に差し替え</small></div>
+    <div class="slide slide-ph">スライド 2</div>
+    <div class="slide slide-ph">スライド 3</div>
+    <button class="car-btn prev" onclick="slide(this.closest('.carousel'),-1)" aria-label="前のスライド">‹</button>
+    <button class="car-btn next" onclick="slide(this.closest('.carousel'),1)" aria-label="次のスライド">›</button>
+    <div class="car-dots"></div>
   </div>
 </div>
 
@@ -477,6 +572,16 @@
   <h1>実際に動かしてみる</h1>
   <div class="highlight">まずは10分で「動いた！」を体験。</div>
 
+  <!-- 動画を入れるとき: 下の .video-ph の行を消して、この<video>を使う。assets/videos/ に mp4 と poster画像を置く
+  <div class="embed">
+    <video controls preload="none" poster="assets/videos/demo1.jpg">
+      <source src="assets/videos/demo1.mp4" type="video/mp4">
+      お使いの環境では動画を再生できません。
+    </video>
+  </div>
+  -->
+  <div class="embed video-ph">▶ デモ動画（準備中）<small>assets/videos/ に mp4 を置いて差し替え</small></div>
+
   <div class="info-block">
     <h3>最初の体験シナリオ</h3>
     <p>ブラウザを開いて、検索して、結果を取得する。<br>難しい設定はなし。コピペで動きます。</p>
@@ -572,6 +677,30 @@
     document.getElementById(id).classList.add('active');
     window.scrollTo(0, 0);
   }
+
+  function goSlide(c, idx) {
+    const slides = c.querySelectorAll('.slide');
+    const dots = c.querySelectorAll('.car-dots span');
+    slides.forEach(s => s.classList.remove('active'));
+    dots.forEach(d => d.classList.remove('on'));
+    slides[idx].classList.add('active');
+    if (dots[idx]) dots[idx].classList.add('on');
+  }
+  function slide(c, dir) {
+    const slides = c.querySelectorAll('.slide');
+    let i = [...slides].findIndex(s => s.classList.contains('active'));
+    i = (i + dir + slides.length) % slides.length;
+    goSlide(c, i);
+  }
+  document.querySelectorAll('.carousel').forEach(c => {
+    const dots = c.querySelector('.car-dots');
+    c.querySelectorAll('.slide').forEach((_, i) => {
+      const d = document.createElement('span');
+      if (i === 0) d.classList.add('on');
+      d.onclick = () => goSlide(c, i);
+      dots.appendChild(d);
+    });
+  });
 </script>
 </body>
 </html>
