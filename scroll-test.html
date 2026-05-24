@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>スクロールテスト</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: sans-serif;
+    overflow-x: hidden;
+  }
+  .top {
+    background: #2563eb;
+    color: #fff;
+    padding: 24px;
+    text-align: center;
+    font-weight: 700;
+    font-size: 1.1rem;
+  }
+  .row {
+    padding: 28px 24px;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #111;
+    border-bottom: 1px solid #fff;
+  }
+  .row span {
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: #555;
+    margin-left: 8px;
+  }
+  .row:nth-child(odd)  { background: #eef2ff; }
+  .row:nth-child(even) { background: #f8f9fa; }
+  .goal {
+    background: #16a34a;
+    color: #fff;
+    padding: 60px 24px;
+    text-align: center;
+    font-weight: 700;
+    font-size: 1.4rem;
+    line-height: 1.8;
+  }
+</style>
+</head>
+<body>
+
+<div class="top">⬇ 一番下まで行けるか試してください</div>
+
+<div class="row">01<span>まだ上の方</span></div>
+<div class="row">02</div>
+<div class="row">03</div>
+<div class="row">04</div>
+<div class="row">05<span>1画面分くらい？</span></div>
+<div class="row">06</div>
+<div class="row">07</div>
+<div class="row">08</div>
+<div class="row">09</div>
+<div class="row">10<span>半分くらい</span></div>
+<div class="row">11</div>
+<div class="row">12</div>
+<div class="row">13</div>
+<div class="row">14</div>
+<div class="row">15<span>もうすぐ</span></div>
+<div class="row">16</div>
+<div class="row">17</div>
+<div class="row">18</div>
+<div class="row">19</div>
+<div class="row">20<span>あと少し！</span></div>
+
+<div class="goal">🎉 ゴール！<br>ここが一番下です。<br>ここまで来られたら<br>スクロールはOKです。</div>
+
+</body>
+</html>
