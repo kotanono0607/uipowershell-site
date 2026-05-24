@@ -2,7 +2,8 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<title>UIpowershell サイト設計</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UIpowershell｜業務自動化サイト</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap');
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -148,7 +149,7 @@
     padding: 4px;
   }
 
-  /* 8要素 */
+  /* グリッド要素 */
   .element-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -173,160 +174,186 @@
     font-size: 0.82rem;
     color: #555;
   }
+
+  /* 人間の仕事 ↔ 技術 の対応 */
+  .map-block {
+    background: #fff;
+    border: 1px solid #e8ecf0;
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin: 8px 0;
+  }
+  .map-block .map-human {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #111;
+    margin-bottom: 6px;
+  }
 </style>
 </head>
 <body>
 
 <!-- ===== TOP ===== -->
 <div class="screen active" id="s0">
-  <div class="label">Site Architecture</div>
-  <h1>UIpowershell<br>サイト設計</h1>
-  <div class="desc">タップして詳細を確認</div>
+  <div class="label">UIpowershell</div>
+  <h1>毎日の作業を、<br>ロボットに任せる。</h1>
+  <div class="desc">今日から始める、無料の業務自動化。タップして見てみる。</div>
 
-  <div class="card" onclick="go('s_concept')">
+  <div class="card" onclick="go('m1')">
     <div class="card-left">
-      <h3>コンセプト</h3>
-      <p>今日から残業を減らす、無料のRPAツール</p>
+      <h3>業務の自動化とは？</h3>
+      <p>毎日の仕事は、実は"小さな操作"の集まり</p>
     </div>
     <div class="card-arrow">›</div>
   </div>
 
-  <div class="card" onclick="go('s_target')">
+  <div class="card" onclick="go('m2')">
     <div class="card-left">
-      <h3>ターゲット</h3>
-      <p>残業を減らしたい・プログラミング未経験</p>
+      <h3>どうやって自動化する？</h3>
+      <p>技術を「人間の仕事の代わり」として選ぶ</p>
     </div>
     <div class="card-arrow">›</div>
   </div>
 
-  <div class="card" onclick="go('s_journey')">
+  <div class="card" onclick="go('m3')">
     <div class="card-left">
-      <h3>学習旅程（5ステップ）</h3>
-      <p>入口から庁内DX設計まで</p>
+      <h3>実際に動かしてみる</h3>
+      <p>まずは10分で「動いた！」を体験</p>
     </div>
     <div class="card-arrow">›</div>
   </div>
 
-  <div class="card" onclick="go('s_pages')">
+  <div class="card" onclick="go('m4')">
     <div class="card-left">
-      <h3>ページ構成</h3>
-      <p>トップ / チュートリアル / 事例集</p>
+      <h3>AIでこれから何が変わる？</h3>
+      <p>今の自動化が、AI時代の"下準備"になる</p>
     </div>
     <div class="card-arrow">›</div>
   </div>
 </div>
 
-<!-- ===== コンセプト ===== -->
-<div class="screen" id="s_concept">
+<!-- ===== M1：業務の自動化とは？ ===== -->
+<div class="screen" id="m1">
   <button class="back" onclick="go('s0')">← 戻る</button>
-  <div class="label">Concept</div>
-  <h1>コンセプト</h1>
-  <div class="highlight">「今日から残業を減らす、無料のRPAツール」</div>
-  <div class="info-block">
-    <h3>検索キーワード</h3>
-    <p>残業 減らしたい 自動化</p>
-  </div>
-  <div class="info-block">
-    <h3>なぜ「技術」ではなく「残業」から入るか</h3>
-    <p>初心者はRPAを調べてここに来ない。日常の悩みで検索してくる。</p>
-  </div>
-</div>
+  <div class="label">What is automation?</div>
+  <h1>業務の自動化とは？</h1>
+  <div class="highlight">毎日の仕事は、実は"小さな操作"の集まり。</div>
 
-<!-- ===== ターゲット ===== -->
-<div class="screen" id="s_target">
-  <button class="back" onclick="go('s0')">← 戻る</button>
-  <div class="label">Target User</div>
-  <h1>ターゲット</h1>
-  <div class="tag-list">
-    <span class="tag">毎日同じ作業を繰り返している</span>
-    <span class="tag">プログラミング未経験</span>
-    <span class="tag">「残業 減らしたい」で検索</span>
-    <span class="tag">RPAを知らなくてもいい</span>
+  <div class="info-block">
+    <h3>人はPCで何をしている？</h3>
+    <p>画面を見て、状況を判断し、マウスやキーボードを動かし、結果を確認する。複雑に見える業務も、ほとんどがこの繰り返しです。</p>
   </div>
+
+  <div class="desc" style="margin:24px 0 8px;">ひとつの操作に分けると、こうなります</div>
+  <div class="element-grid">
+    <div class="element-card">
+      <div class="num">見る</div>
+      <div class="name">視認</div>
+      <div class="detail">画面を確認する / 読む</div>
+    </div>
+    <div class="element-card">
+      <div class="num">入れる</div>
+      <div class="name">入力</div>
+      <div class="detail">キーボード / コピペ / 選択</div>
+    </div>
+    <div class="element-card">
+      <div class="num">動かす</div>
+      <div class="name">操作</div>
+      <div class="detail">クリック / 移動 / スクロール</div>
+    </div>
+    <div class="element-card">
+      <div class="num">決める</div>
+      <div class="name">判定</div>
+      <div class="detail">ある？ない？ / OK？エラー？</div>
+    </div>
+  </div>
+
   <div class="info-block" style="margin-top:16px;">
-    <h3>最終的に目指すレベル</h3>
-    <p>庁内・組織全体のDXを設計・展開できる担当者</p>
+    <h3>どんな業務も この形に整理できる</h3>
+    <p>インプット → 処理 → アウトプット。<br>だから、ひとつひとつは機械に任せられます。</p>
   </div>
 </div>
 
-<!-- ===== 学習旅程 ===== -->
-<div class="screen" id="s_journey">
+<!-- ===== M2：どうやって自動化する？ ===== -->
+<div class="screen" id="m2">
   <button class="back" onclick="go('s0')">← 戻る</button>
-  <div class="label">Learning Journey</div>
-  <h1>学習旅程</h1>
-  <div class="desc">5つのステップで入口から設計者レベルへ</div>
+  <div class="label">How to automate</div>
+  <h1>どうやって自動化する？</h1>
+  <div class="desc">技術は単独で覚えなくていい。「人間の仕事の代わり」として選びます。</div>
 
-  <div class="card" onclick="go('s_step1')">
+  <div class="map-block">
+    <div class="map-human">🖱 操作する</div>
+    <div class="tag-list">
+      <span class="tag">マウス</span>
+      <span class="tag">キーボード</span>
+      <span class="tag">RPA</span>
+    </div>
+  </div>
+  <div class="map-block">
+    <div class="map-human">👁 見る</div>
+    <div class="tag-list">
+      <span class="tag">OCR</span>
+      <span class="tag">画像認識</span>
+      <span class="tag">PDF解析</span>
+    </div>
+  </div>
+  <div class="map-block">
+    <div class="map-human">🧠 考える</div>
+    <div class="tag-list">
+      <span class="tag">条件分岐</span>
+      <span class="tag">AI</span>
+      <span class="tag">分類</span>
+    </div>
+  </div>
+  <div class="map-block">
+    <div class="map-human">📊 データを扱う</div>
+    <div class="tag-list">
+      <span class="tag">CSV</span>
+      <span class="tag">ETL</span>
+      <span class="tag">Excel</span>
+      <span class="tag">JSON</span>
+    </div>
+  </div>
+  <div class="map-block">
+    <div class="map-human">🔗 システムをつなぐ</div>
+    <div class="tag-list">
+      <span class="tag">API</span>
+      <span class="tag">PowerShell</span>
+      <span class="tag">連携</span>
+    </div>
+  </div>
+
+  <div class="desc" style="margin:28px 0 8px;">もっと詳しく</div>
+
+  <div class="card" onclick="go('m2_check')">
     <div class="card-left">
-      <div class="step-num">STEP 1</div>
-      <h3>入口 — 残業を減らしたい</h3>
-      <p>RPAとは何か、自分に使えるのかを知る</p>
+      <h3>RPAに向いてる業務チェックリスト</h3>
+      <p>自分の仕事が自動化向きか判定する</p>
     </div>
     <div class="card-arrow">›</div>
   </div>
-
-  <div class="card" onclick="go('s_step2')">
+  <div class="card" onclick="go('m2_eight')">
     <div class="card-left">
-      <div class="step-num">STEP 2</div>
-      <h3>判断 — 業務チェックリスト</h3>
-      <p>自分の業務がRPAに向いているか判定する</p>
+      <h3>業務自動化の8要素</h3>
+      <p>組み合わせればほぼすべて自動化できる</p>
     </div>
     <div class="card-arrow">›</div>
   </div>
-
-  <div class="card" onclick="go('s_step3')">
+  <div class="card" onclick="go('m2_layer')">
     <div class="card-left">
-      <div class="step-num">STEP 3</div>
-      <h3>体験 — 実際に動かす</h3>
-      <p>UIpowershellでブラウザ自動化を体験する</p>
-    </div>
-    <div class="card-arrow">›</div>
-  </div>
-
-  <div class="card" onclick="go('s_step4')">
-    <div class="card-left">
-      <div class="step-num">STEP 4</div>
-      <h3>理解 — 業務デジタル化の3階層モデル</h3>
-      <p>BPR → 自動化選定 → 技術導入の構造を学ぶ</p>
-    </div>
-    <div class="card-arrow">›</div>
-  </div>
-
-  <div class="card" onclick="go('s_step5')">
-    <div class="card-left">
-      <div class="step-num">STEP 5</div>
-      <h3>設計 — 業務自動化の8要素</h3>
-      <p>組織全体の自動化を設計・展開できる</p>
+      <h3>業務デジタル化の3階層モデル</h3>
+      <p>もう一歩ふみこんだ設計の考え方</p>
     </div>
     <div class="card-arrow">›</div>
   </div>
 </div>
 
-<!-- ===== STEP 1 ===== -->
-<div class="screen" id="s_step1">
-  <button class="back" onclick="go('s_journey')">← 戻る</button>
-  <div class="label">Step 1</div>
-  <h1>入口</h1>
-  <div class="info-block">
-    <h3>ユーザーの状態</h3>
-    <p>「残業を減らしたい」で検索してきた。RPAという言葉を知らなくてもいい。</p>
-  </div>
-  <div class="info-block">
-    <h3>サイトがすること</h3>
-    <p>「あなたの毎日の繰り返し作業は、ロボットに任せられます」と伝える。難しい説明はしない。</p>
-  </div>
-  <div class="info-block">
-    <h3>ゴール</h3>
-    <p>「自分にも使えそう」と思ってもらう。</p>
-  </div>
-</div>
-
-<!-- ===== STEP 2 ===== -->
-<div class="screen" id="s_step2">
-  <button class="back" onclick="go('s_journey')">← 戻る</button>
-  <div class="label">Step 2</div>
+<!-- ===== M2-sub：チェックリスト ===== -->
+<div class="screen" id="m2_check">
+  <button class="back" onclick="go('m2')">← 戻る</button>
+  <div class="label">Checklist</div>
   <h1>業務チェックリスト</h1>
-  <div class="desc">「この仕事、RPAに向いてるかな？」を判断するための2つの視点</div>
+  <div class="desc">「この仕事、自動化に向いてるかな？」を判断する2つの視点</div>
 
   <div class="info-block">
     <h3>✅ 適合性チェック（はいが3つ以上 → 自動化の対象候補）</h3>
@@ -349,67 +376,10 @@
   </div>
 </div>
 
-<!-- ===== STEP 3 ===== -->
-<div class="screen" id="s_step3">
-  <button class="back" onclick="go('s_journey')">← 戻る</button>
-  <div class="label">Step 3</div>
-  <h1>実際に動かす</h1>
-  <div class="info-block">
-    <h3>ユーザーの状態</h3>
-    <p>「やってみたい、でも不安」</p>
-  </div>
-  <div class="info-block">
-    <h3>最初の体験シナリオ</h3>
-    <p>ブラウザを開いて、検索して、結果を取得する。<br>10分で「動いた！」を体験する。</p>
-  </div>
-  <div class="info-block">
-    <h3>使う技術</h3>
-    <p>CDP（Chrome DevTools Protocol）によるブラウザ自動化</p>
-  </div>
-</div>
-
-<!-- ===== STEP 4 ===== -->
-<div class="screen" id="s_step4">
-  <button class="back" onclick="go('s_journey')">← 戻る</button>
-  <div class="label">Step 4</div>
-  <h1>業務デジタル化の3階層モデル</h1>
-  <div class="desc">「業務の見直し → 自動化方向の選定 → 技術導入」の順に考える</div>
-
-  <div class="layer">
-    <div class="layer-num">第1階層</div>
-    <h3>BPR（業務プロセス再設計）</h3>
-    <ul>
-      <li>・業務の棚卸し・見える化</li>
-      <li>・ムダ／重複の削除</li>
-      <li>・業務の標準化・単純化</li>
-    </ul>
-    <div style="font-size:0.82rem; color:#2563eb; margin-top:8px;">👉「そもそもこの業務、今の形でいいのか？」を問い直す</div>
-  </div>
-  <div class="arrow-down">↓</div>
-  <div class="layer">
-    <div class="layer-num">第2階層</div>
-    <h3>目的別の自動化レイヤー</h3>
-    <ul>
-      <li>・何を自動化するかを選定する</li>
-      <li>・RPA / ETL / スクリプトの使い分け</li>
-    </ul>
-  </div>
-  <div class="arrow-down">↓</div>
-  <div class="layer">
-    <div class="layer-num">第3階層</div>
-    <h3>技術・ツールの導入</h3>
-    <ul>
-      <li>・UIpowershell（RPA）</li>
-      <li>・Python / PowerShell（スクリプト）</li>
-      <li>・ETL ツール</li>
-    </ul>
-  </div>
-</div>
-
-<!-- ===== STEP 5 ===== -->
-<div class="screen" id="s_step5">
-  <button class="back" onclick="go('s_journey')">← 戻る</button>
-  <div class="label">Step 5</div>
+<!-- ===== M2-sub：8要素 ===== -->
+<div class="screen" id="m2_eight">
+  <button class="back" onclick="go('m2')">← 戻る</button>
+  <div class="label">8 Elements</div>
   <h1>業務自動化の8要素</h1>
   <div class="desc">これらを組み合わせれば、ほぼすべての業務自動化が可能</div>
 
@@ -431,108 +401,165 @@
     </div>
     <div class="element-card">
       <div class="num">04</div>
-      <div class="name">スクリプト処理</div>
-      <div class="detail">Python / PowerShell</div>
+      <div class="name">スクリプトベース</div>
+      <div class="detail">全体の統括・制御</div>
     </div>
     <div class="element-card">
       <div class="num">05</div>
-      <div class="name">通知・レポート</div>
-      <div class="detail">結果の配信・可視化</div>
+      <div class="name">データベース</div>
+      <div class="detail">保存・進捗管理</div>
     </div>
     <div class="element-card">
       <div class="num">06</div>
-      <div class="name">ログ・監査</div>
-      <div class="detail">実行履歴の記録</div>
+      <div class="name">通知</div>
+      <div class="detail">メール・グループウェア</div>
     </div>
     <div class="element-card">
       <div class="num">07</div>
-      <div class="name">スケジューラ</div>
-      <div class="detail">定時・条件トリガー</div>
+      <div class="name">ダッシュボード</div>
+      <div class="detail">結果の可視化</div>
     </div>
     <div class="element-card">
       <div class="num">08</div>
-      <div class="name">例外処理</div>
-      <div class="detail">エラー対応・リカバリ</div>
+      <div class="name">ログ管理</div>
+      <div class="detail">エラー追跡・実行履歴</div>
     </div>
   </div>
 </div>
 
-<!-- ===== ページ構成 ===== -->
-<div class="screen" id="s_pages">
+<!-- ===== M2-sub：3階層モデル ===== -->
+<div class="screen" id="m2_layer">
+  <button class="back" onclick="go('m2')">← 戻る</button>
+  <div class="label">3-Layer Model</div>
+  <h1>業務デジタル化の3階層モデル</h1>
+  <div class="desc">「業務の見直し → 自動化方向の選定 → 技術導入」の順に考える</div>
+
+  <div class="layer">
+    <div class="layer-num">第1階層</div>
+    <h3>業務の見直し（BPR）</h3>
+    <ul>
+      <li>・業務の棚卸し・見える化</li>
+      <li>・ムダ／重複の削除</li>
+      <li>・業務の標準化・単純化</li>
+    </ul>
+    <div style="font-size:0.82rem; color:#2563eb; margin-top:8px;">👉「そもそもこの業務、今の形でいいのか？」を問い直す</div>
+  </div>
+  <div class="arrow-down">↓</div>
+  <div class="layer">
+    <div class="layer-num">第2階層</div>
+    <h3>目的別の自動化レイヤー</h3>
+    <ul>
+      <li>・UI操作 / データ処理 / 電子化</li>
+      <li>・ナレッジ共有 / 判断支援</li>
+      <li>・何を自動化するかを選定する</li>
+    </ul>
+  </div>
+  <div class="arrow-down">↓</div>
+  <div class="layer">
+    <div class="layer-num">第3階層</div>
+    <h3>目的達成のための技術・ツール</h3>
+    <ul>
+      <li>・UIpowershell（RPA）/ Python</li>
+      <li>・Power Apps / ETL ツール</li>
+      <li>・VOICEVOX / ChatGPT など</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ===== M3：実際に動かしてみる ===== -->
+<div class="screen" id="m3">
   <button class="back" onclick="go('s0')">← 戻る</button>
-  <div class="label">Page Structure</div>
-  <h1>ページ構成</h1>
+  <div class="label">Try it</div>
+  <h1>実際に動かしてみる</h1>
+  <div class="highlight">まずは10分で「動いた！」を体験。</div>
 
-  <div class="card" onclick="go('s_page1')">
-    <div class="card-left">
-      <h3>Page 01 — トップページ</h3>
-      <p>訴求 ＋ ダウンロード</p>
-    </div>
-    <div class="card-arrow">›</div>
+  <div class="info-block">
+    <h3>最初の体験シナリオ</h3>
+    <p>ブラウザを開いて、検索して、結果を取得する。<br>難しい設定はなし。コピペで動きます。</p>
   </div>
-  <div class="card" onclick="go('s_page2')">
-    <div class="card-left">
-      <h3>Page 02 — チュートリアル</h3>
-      <p>5ステップの学習体験</p>
+
+  <div class="info-block">
+    <h3>こんな"小さな成功"から</h3>
+    <div class="tag-list">
+      <span class="tag">OCRが便利</span>
+      <span class="tag">自動入力できた</span>
+      <span class="tag">CSV処理できた</span>
+      <span class="tag">PowerShellが動いた</span>
     </div>
-    <div class="card-arrow">›</div>
   </div>
-  <div class="card" onclick="go('s_page3')">
-    <div class="card-left">
-      <h3>Page 03 — 事例集</h3>
-      <p>「こんな業務が自動化できた」</p>
-    </div>
-    <div class="card-arrow">›</div>
+
+  <div class="info-block">
+    <h3>まずは小さな操作を置き換える</h3>
+    <ul class="checklist">
+      <li><span class="icon">・</span><div>転記</div></li>
+      <li><span class="icon">・</span><div>ダウンロード</div></li>
+      <li><span class="icon">・</span><div>起票</div></li>
+      <li><span class="icon">・</span><div>確認</div></li>
+      <li><span class="icon">・</span><div>通知</div></li>
+    </ul>
+    <div class="sub" style="margin-top:6px;">最初から全部を自動化しなくていい。積み重ねが業務全体の自動化につながります。</div>
+  </div>
+
+  <div class="info-block">
+    <h3>使う技術</h3>
+    <p>CDP（Chrome DevTools Protocol）によるブラウザ自動化＋PowerShell連携</p>
   </div>
 </div>
 
-<!-- ===== PAGE 1 ===== -->
-<div class="screen" id="s_page1">
-  <button class="back" onclick="go('s_pages')">← 戻る</button>
-  <div class="label">Page 01</div>
-  <h1>トップページ</h1>
-  <div class="info-block">
-    <h3>役割</h3>
-    <p>「残業減らせます」の訴求 ＋ ダウンロードボタン</p>
-  </div>
-  <div class="info-block">
-    <h3>ユーザーの状態</h3>
-    <p>「これ自分に使えるのか？」を判断しようとしている</p>
-  </div>
-  <div class="info-block" style="opacity:0.4;">
-    <h3>コンテンツ</h3>
-    <p>未定</p>
-  </div>
-</div>
+<!-- ===== M4：AIでこれから何が変わる？ ===== -->
+<div class="screen" id="m4">
+  <button class="back" onclick="go('s0')">← 戻る</button>
+  <div class="label">Future with AI</div>
+  <h1>AIでこれから何が変わる？</h1>
+  <div class="desc">今やっている自動化が、そのままAI時代の"下準備"になります。</div>
 
-<!-- ===== PAGE 2 ===== -->
-<div class="screen" id="s_page2">
-  <button class="back" onclick="go('s_pages')">← 戻る</button>
-  <div class="label">Page 02</div>
-  <h1>チュートリアル</h1>
-  <div class="info-block">
-    <h3>構成</h3>
-    <p>学習旅程の5ステップに対応したページ群</p>
+  <div class="layer">
+    <div class="layer-num">第1段階（現在）</div>
+    <h3>人間中心</h3>
+    <ul>
+      <li>・人が操作 / 一部RPA</li>
+      <li>・Excel文化 / 属人化</li>
+    </ul>
   </div>
-  <div class="info-block">
-    <h3>設計方針</h3>
-    <p>1画面 = 1つのことだけ。初心者が迷わない情報の出し方。</p>
+  <div class="arrow-down">↓</div>
+  <div class="layer">
+    <div class="layer-num">第2段階（数年以内）</div>
+    <h3>AI補助</h3>
+    <ul>
+      <li>・AIが判断支援、人が承認</li>
+      <li>・RPA連携 / 半自動化</li>
+    </ul>
   </div>
-</div>
+  <div class="arrow-down">↓</div>
+  <div class="layer">
+    <div class="layer-num">第3段階</div>
+    <h3>AIエージェント化</h3>
+    <ul>
+      <li>・AIが画面操作・問い合わせ対応・文書作成</li>
+      <li>・AIがシステム横断処理</li>
+      <li>・人は監査・責任管理</li>
+    </ul>
+  </div>
 
-<!-- ===== PAGE 3 ===== -->
-<div class="screen" id="s_page3">
-  <button class="back" onclick="go('s_pages')">← 戻る</button>
-  <div class="label">Page 03</div>
-  <h1>事例集</h1>
+  <div class="info-block" style="margin-top:16px;">
+    <h3>これから重要になる人材</h3>
+    <p>「AIモデルを作れる人」ではなく、<br><strong>「現場業務を、AIが扱える構造に変えた人」</strong>。</p>
+  </div>
+
   <div class="info-block">
-    <h3>役割</h3>
-    <p>「自分の仕事に使えるか」を具体的にイメージしてもらう</p>
+    <h3>庁内DX推進の準備物</h3>
+    <ul class="checklist">
+      <li><span class="icon">・</span><div>OBS Studio（ZIP版）</div></li>
+      <li><span class="icon">・</span><div>AviUtl（本体＋拡張編集プラグイン）</div></li>
+      <li><span class="icon">・</span><div>ScreenToGif</div></li>
+      <li><span class="icon">・</span><div>VOICEVOX（商用OKキャラ）</div></li>
+      <li><span class="icon">・</span><div>Pythonポータブル構成（ZIP）</div></li>
+      <li><span class="icon">・</span><div>自作RPAスクリプト（PowerShell連携）</div></li>
+      <li><span class="icon">・</span><div>各ツール導入マニュアル（PDF）</div></li>
+    </ul>
   </div>
-  <div class="info-block" style="opacity:0.4;">
-    <h3>事例ラインナップ</h3>
-    <p>未定</p>
-  </div>
+
+  <div class="highlight">今の自動化は、将来のAI運用基盤づくり。</div>
 </div>
 
 <script>
