@@ -23,8 +23,12 @@
 | 3 | AI（考える） | `ai-toha-script.md` | `ai-toha.mp4`（1:59） | 例から学ぶ／ハルシネーション |
 | 4 | API（つなぐ） | `api-toha-script.md` | `api-toha.mp4`（1:59） | 受付窓口／両側の対応が要る |
 | 5 | 二重入力（敵） | `futae-toha-script.md` | `futae-toha.mp4`（1:57） | なぜ起きる→OCR/API/RPAで解く |
+| 6 | ルール（確かめる） | `rule-toha-script.md` | `rule-toha.mp4`（1:23） | IF/THEN／決めた条件しか見ない |
+| 7 | AIエージェント | `agent-toha-script.md` | `agent-toha.mp4`（1:24） | M4第3段階／暴走・権限の限界 |
+| 8 | DX | `dx-toha-script.md` | `dx-toha.mp4`（1:36） | 3段階／なんちゃってDXに注意 |
 
-- ビルド：スライド生成 `.m1build/series_slides.py`（hero画像埋め込み＋図解→PNG）、動画 `.m1build/build_series.py`（VOICEVOX→口パク→クレジット）。OCRのみ `ocr_slides.py`/`build_ocr.py`。
+- ビルド：#1=`ocr_slides.py`/`build_ocr.py`。#2〜5（hero画像あり）=`series_slides.py`（hero埋め込み＋図解）/`build_series.py`。#6〜8（**図解のみ・画像なし**）=`series2_slides.py`/`build_series2.py`。いずれも動画は VOICEVOX→口パク→クレジット焼き込み。
+- #1・#6〜8は図解のみ（hero画像なし）。#2〜5は冒頭スライドにhero画像あり。←「画像はもういい」方針で#6以降は画像取得を省略。
 
 ## モジュール別：本番台本と反映状態（2026-05-25 推敲3を反映）
 > ✅ 推敲3を**動画に反映済み**（ずんだもん再生成→口パク→クレジット）。
