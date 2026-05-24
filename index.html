@@ -277,13 +277,63 @@
     cursor: pointer;
   }
   .car-dots span.on { background: #2563eb; }
+
+  /* 動画一覧（本メイン） */
+  .vrec {
+    display: flex; align-items: center; gap: 14px;
+    background: #fff; border: 1px solid #e8ecf0; border-radius: 12px;
+    padding: 12px; margin-bottom: 12px; cursor: pointer;
+    transition: box-shadow .15s, transform .05s;
+  }
+  .vrec:hover { box-shadow: 0 8px 24px rgba(15,23,42,.08); }
+  .vrec:active { transform: scale(.995); }
+  .vrec .thumb {
+    width: 128px; aspect-ratio: 16/9; flex: 0 0 auto;
+    border-radius: 8px; object-fit: cover; background: #eef2ff;
+  }
+  .vrec .meta { flex: 1 1 auto; min-width: 0; }
+  .vrec .meta .vt { font-weight: 700; font-size: 0.98rem; color: #111; margin-bottom: 3px; }
+  .vrec .meta .vd { font-size: 0.8rem; color: #777; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .vrec .vtag {
+    display: inline-block; font-size: 0.66rem; font-weight: 700; letter-spacing: 1px;
+    color: #2563eb; background: #eff3ff; border-radius: 4px; padding: 1px 6px; margin-right: 6px;
+  }
+  .vrec .vdur { flex: 0 0 auto; font-size: 0.78rem; color: #999; }
+  .vrec .varrow { flex: 0 0 auto; color: #ccc; font-size: 1.3rem; }
 </style>
 </head>
 <body>
 
-<!-- ===== TOP ===== -->
-<div class="screen active" id="s0">
-  <div class="label">UIpowershell</div>
+<!-- ===== 動画一覧（本メイン） ===== -->
+<div class="screen active" id="library">
+  <div class="label">Video library</div>
+  <h1>動画一覧</h1>
+  <div class="desc">これまでに作成した解説動画の一覧です。タップで再生します。</div>
+  <div id="video-list"></div>
+  <div class="card" onclick="go('s0')" style="margin-top:20px;">
+    <div class="card-left">
+      <h3>メニュー構想を見る</h3>
+      <p>旧サイト構成（M1〜M4のメニュー型）はこちら</p>
+    </div>
+    <div class="card-arrow">›</div>
+  </div>
+</div>
+
+<!-- ===== 動画 詳細・再生 ===== -->
+<div class="screen" id="vplay">
+  <button class="back" onclick="go('library')">← 一覧へ戻る</button>
+  <div class="label" id="vplay-tag"></div>
+  <h1 id="vplay-title"></h1>
+  <div class="embed">
+    <video id="vplay-video" controls preload="auto" playsinline></video>
+  </div>
+  <p class="desc" id="vplay-desc" style="margin-top:14px;"></p>
+</div>
+
+<!-- ===== TOP（メニュー構想） ===== -->
+<div class="screen" id="s0">
+  <button class="back" onclick="go('library')">← 動画一覧へ</button>
+  <div class="label">メニュー構想 ・ UIpowershell</div>
   <h1>毎日の作業を、<br>ロボットに任せる。</h1>
   <div class="desc">今日から始める、無料の業務自動化。タップして見てみる。</div>
 
@@ -727,10 +777,55 @@
 
 <script>
   function go(id) {
+    document.querySelectorAll('video').forEach(v => { try { v.pause(); } catch (e) {} });
     document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
     document.getElementById(id).classList.add('active');
     window.scrollTo(0, 0);
   }
+
+  // ===== 動画一覧（レコード）。新しい動画はここに追加していく（上書きしない）=====
+  const VIDEOS = [
+    { id: 'm1', tag: 'M1', title: '業務の自動化とは？', desc: '毎日の仕事は、実は"小さな操作"の集まり。', dur: '0:54',
+      poster: 'assets/videos/m1-automation.jpg', mp4: 'assets/videos/m1-automation.mp4' },
+    { id: 'm2', tag: 'M2', title: 'どうやって自動化する？', desc: '技術は「人間の仕事の代わり」として選ぶ。', dur: '1:33',
+      poster: 'assets/videos/m2-howto.jpg', mp4: 'assets/videos/m2-howto.mp4' },
+    { id: 'm4', tag: 'M4', title: 'AIでこれから何が変わる？', desc: '今の自動化が、AI時代の"下準備"になる。', dur: '1:24',
+      poster: 'assets/videos/m4-ai-future.jpg', mp4: 'assets/videos/m4-ai-future.mp4' },
+    { id: 'm1img', tag: 'M1', title: '業務の自動化とは？（イメージ版）', desc: 'イラスト中心・文字少なめのイメージ重視版。', dur: '0:54',
+      poster: 'assets/videos/m1-automation-img.jpg', mp4: 'assets/videos/m1-automation-img.mp4' },
+    { id: 'm1zunda', tag: 'M1', title: '業務の自動化とは？（ずんだもん版）', desc: 'ずんだもんナレーター＋口パク。VOICEVOX:ずんだもん／立ち絵:坂本アヒル', dur: '1:00',
+      poster: 'assets/videos/m1-zunda.jpg', mp4: 'assets/videos/m1-zunda.mp4' },
+    { id: 'm1zukai', tag: 'M1', title: '業務の自動化とは？（実例・図解版）', desc: '申請書→Excel転記を図解で解説。ずんだもん。VOICEVOX:ずんだもん／立ち絵:坂本アヒル', dur: '1:38',
+      poster: 'assets/videos/m1-zukai.jpg', mp4: 'assets/videos/m1-zukai.mp4' },
+  ];
+
+  function renderLibrary() {
+    const list = document.getElementById('video-list');
+    if (!list) return;
+    list.innerHTML = VIDEOS.map((v, i) => `
+      <div class="vrec" onclick="playVideo(${i})">
+        <img class="thumb" src="${v.poster}" alt="" loading="lazy">
+        <div class="meta">
+          <div class="vt"><span class="vtag">${v.tag}</span>${v.title}</div>
+          <div class="vd">${v.desc}</div>
+        </div>
+        <div class="vdur">${v.dur}</div>
+        <div class="varrow">›</div>
+      </div>`).join('');
+  }
+
+  function playVideo(i) {
+    const v = VIDEOS[i];
+    document.getElementById('vplay-tag').textContent = v.tag;
+    document.getElementById('vplay-title').textContent = v.title;
+    document.getElementById('vplay-desc').textContent = v.desc;
+    const vid = document.getElementById('vplay-video');
+    vid.poster = v.poster;
+    vid.src = v.mp4;
+    go('vplay');
+  }
+
+  renderLibrary();
 
   function goSlide(c, idx) {
     const slides = c.querySelectorAll('.slide');

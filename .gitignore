@@ -2,3 +2,5 @@
 .m1build/
 # Playwright MCP の一時出力
 .playwright-mcp/
+# 立ち絵の生素材（坂本アヒルさんのPSD等。再配布は避け、ローカル保持のみ）
+assets/tachie/
